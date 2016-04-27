@@ -22,7 +22,7 @@ $(function() {
   var typing = false;
   var lastTypingTime;
   var $currentInput = $usernameInput.focus();
-
+  var io = require('socket.io');
   var socket = io();
 
   function addParticipantsMessage (data) {
