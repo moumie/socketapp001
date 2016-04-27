@@ -2,14 +2,15 @@
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
-var io = require('../..')(server);
-//var io = require('socket.io')(server);
+//var io = require('../..')(server);
+var io = require('socket.io')(server);
 var port = process.env.PORT || 1337;
 
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
 });
-
+var addr = server.address();
+console.log('   app listening on http://' + addr.address + ':' + addr.port);
 // Routing
 
 app.use(express.static(__dirname + '/public'));
