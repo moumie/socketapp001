@@ -13,11 +13,9 @@ var addr = server.address();
 console.log('   app listening on http://' + addr.address + ':' + addr.port);
 // Routing
 
-app.use(express.static(__dirname + 'public'));
+//app.use(express.static(__dirname + '/public'));
 //app.use(express.static(__dirname + '/node_modules'));
-app.get('/', function(req, res) {
- res.sendFile(__dirname + '/public/index.html');
-});
+
 // Chatroom
 
 var numUsers = 0;
