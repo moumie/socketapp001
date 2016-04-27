@@ -22,8 +22,8 @@ $(function() {
   var typing = false;
   var lastTypingTime;
   var $currentInput = $usernameInput.focus();
-
-  var socket = io();
+  var socket = io({transports:['websocket']});
+  //var socket = io();
 
   function addParticipantsMessage (data) {
     var message = '';
