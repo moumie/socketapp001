@@ -5,6 +5,7 @@ var server = require('http').createServer(app);
 //var io = require('../..')(server);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 1337;
+var mongo = require('mongodb').MongoClient;
 
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
@@ -30,6 +31,15 @@ io.on('connection', function (socket) {
       username: socket.username,
       message: data
     });
+    
+    //Persist in DB
+        mongo.connect(process.env.PROJECT_MONGOLAB_URI, function (err, db) {
+            var collection = db.collection('chat messages');
+            collection.insert({ content: data }, function (err, o) {
+                if (err) { console.warn(err.message); }
+                else { console.log("chat message inserted into db: " + data); }
+            });
+        });
   });
 
   // when the client emits 'add user', this listens and executes
